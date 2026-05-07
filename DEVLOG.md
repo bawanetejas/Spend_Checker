@@ -1,0 +1,22 @@
+Day 1 2026-05-07
+Hours worked: 5hr
+
+What I did:
+Project Initialization: Initialized the public GitHub repository and created all 12 mandatory markdown files at the root to establish the project structure.
+Problem Analysis: Deep-dived into the Credex "Spend Check" problem statement to understand the goal of lead generation through defensible financial auditing.
+Task Roadmap: Broke down the 7-day build into a 6-day execution plan to ensure consistency and avoid "weekend cramming".
+Pricing Research: Conducted manual research on current pricing for core tools including Cursor, Claude, and ChatGPT.
+Initial User Validation: Conducted the first of three required user interviews with an AI Engineer to gather real-world pain points regarding AI tool subscription management.
+
+What I learned:
+User Insight: Learned that users may value "real-time evidence" and centralized tracking for all AI subscriptions more than simple monthly savings numbers.
+Audit Logic: Realized that the audit engine must be honest and "defensible" to a finance professional, meaning I cannot manufacture fake savings for optimal stacks.
+
+Blockers / what I'm stuck on:
+Waiting for responses from two more potential interviewees to fulfill the "three real conversations" requirement.
+Evaluating the best LLM model to use free.
+
+Plan for tomorrow:
+Complete the remaining two user interviews and document them in USER_INTERVIEWS.md.
+Initialize the React.js frontend and finalize the ARCHITECTURE.md writeup, including the tech stack justification.
+Draft the initial GTM (Go-To-Market) strategy.
