@@ -20,3 +20,19 @@ Plan for tomorrow:
 Complete the remaining two user interviews and document them in USER_INTERVIEWS.md.
 Initialize the React.js frontend and finalize the ARCHITECTURE.md writeup, including the tech stack justification.
 Draft the initial GTM (Go-To-Market) strategy.
+
+## Day 2 — YYYY-MM-DD
+
+**Hours worked:** 5hr
+
+**What I did:**  
+Worked on gathering the pricing data and started building the core logic of the project.
+
+**What I learned:**  
+Different LLMs are specialized in different areas, so we need to assign ratings to provide better alternatives in the results.
+
+**Blockers / what I'm stuck on:**  
+The calculation part is still remaining, along with interviews of the two remaining people.
+
+**Plan for tomorrow:**  
+Work on the calculation logic and design the architecture.md file.
