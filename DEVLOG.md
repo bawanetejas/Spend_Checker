@@ -21,7 +21,7 @@ Complete the remaining two user interviews and document them in USER_INTERVIEWS.
 Initialize the React.js frontend and finalize the ARCHITECTURE.md writeup, including the tech stack justification.
 Draft the initial GTM (Go-To-Market) strategy.
 
-## Day 2 — YYYY-MM-DD
+## Day 2 — 2026-05-08
 
 **Hours worked:** 5hr
 
@@ -36,3 +36,23 @@ The calculation part is still remaining, along with interviews of the two remain
 
 **Plan for tomorrow:**  
 Work on the calculation logic and design the architecture.md file.
+
+## Day 3 — 2026-05-09
+
+**Hours worked:** 5hr
+
+**What I did:**  
+Worked on building the ui or the audit page and result page, also worked on the logic for the
+downgrad or show alternative to user for the Chat gpt
+created the architecture.md file
+
+**What I learned:**  
+The rule we are applying to downgrade or show alternative would be different for the others tool
+
+**Blockers / what I'm stuck on:**  
+The calculation part is tricky i am tried to make centralised calculation plan for the tool ,
+the interview are still remaining ,
+
+**Plan for tomorrow:**  
+Work on the remaining calculation logic
+Draft the initial GTM (Go-To-Market) strategy.
