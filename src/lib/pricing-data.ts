@@ -1,4 +1,4 @@
-// lib/pricing-data.ts
+
 export interface PlanPricing {
     name: string;
     pricePerUser: number;
@@ -6,6 +6,7 @@ export interface PlanPricing {
     minSeats?: number;
     maxSeats?: number;
     features?: string[];
+    Custom?: boolean;
 }
 
 export interface VendorPricing {
@@ -21,13 +22,13 @@ export const PRICING_DATABASE: Record<string, VendorPricing> = {
         url: 'https://openai.com/chatgpt/pricing',
         verifiedDate: '2026-05-08',
         plans: {
-            free: { name: 'Free', pricePerUser: 0, currency: 'INR' },
-            go: { name: 'Go', pricePerUser: 399, currency: 'INR' },
+            // free: { name: 'Free', pricePerUser: 0, currency: 'INR' },
+            // go: { name: 'Go', pricePerUser: 399, currency: 'INR' },
             plus: { name: 'Plus', pricePerUser: 1999, currency: 'INR' },
             pro: { name: 'Pro', pricePerUser: 10699, currency: 'INR' },
-            'business-codex': { name: 'Business Codex', pricePerUser: 0, currency: 'INR' }, // Usage-based
+            // 'business-codex': { name: 'Business Codex', pricePerUser: 0, currency: 'INR', Custom: true }, // Usage-based
             'business-full': { name: 'Business ChatGPT & Codex', pricePerUser: 1800, currency: 'INR' },
-            enterprise: { name: 'Enterprise', pricePerUser: 0, currency: 'INR' }, // Custom
+            enterprise: { name: 'Enterprise', pricePerUser: 0, currency: 'INR', Custom: true }, // Custom
         },
     },
     claude: {
@@ -40,7 +41,7 @@ export const PRICING_DATABASE: Record<string, VendorPricing> = {
             max: { name: 'Max', pricePerUser: 100, currency: 'USD' },
             'team-standard': { name: 'Team Standard', pricePerUser: 25, currency: 'USD', minSeats: 2 },
             'team-premium': { name: 'Team Premium', pricePerUser: 100, currency: 'USD', minSeats: 2 },
-            enterprise: { name: 'Enterprise', pricePerUser: 0, currency: 'USD' }, // Custom
+            enterprise: { name: 'Enterprise', pricePerUser: 0, currency: 'USD', Custom: true }, // Custom
         },
     },
     cursor: {
@@ -53,7 +54,7 @@ export const PRICING_DATABASE: Record<string, VendorPricing> = {
             'pro-plus': { name: 'Pro+', pricePerUser: 60, currency: 'USD' },
             ultra: { name: 'Ultra', pricePerUser: 200, currency: 'USD' },
             teams: { name: 'Teams', pricePerUser: 40, currency: 'USD', minSeats: 2 },
-            enterprise: { name: 'Enterprise', pricePerUser: 0, currency: 'USD' }, // Custom
+            enterprise: { name: 'Enterprise', pricePerUser: 0, currency: 'USD', Custom: true }, // Custom
         },
     },
     'github-copilot': {
@@ -61,7 +62,7 @@ export const PRICING_DATABASE: Record<string, VendorPricing> = {
         url: 'https://github.com/features/copilot/plans',
         verifiedDate: '2026-05-08',
         plans: {
-            free: { name: 'Free', pricePerUser: 0, currency: 'USD' },
+
             pro: { name: 'Pro', pricePerUser: 10, currency: 'USD' },
             'pro-plus': { name: 'Pro+', pricePerUser: 39, currency: 'USD' },
             business: { name: 'Business', pricePerUser: 19, currency: 'USD', minSeats: 2 },
@@ -73,10 +74,10 @@ export const PRICING_DATABASE: Record<string, VendorPricing> = {
         url: 'https://one.google.com/about/ai-premium/',
         verifiedDate: '2026-05-08',
         plans: {
-            "free": { name: 'Free of charge', pricePerUser: 0, currency: 'INR' },
-            'plus': { name: 'Google AI Plus', pricePerUser: 399, currency: 'INR' },
+
+            // 'plus': { name: 'Google AI Plus', pricePerUser: 399, currency: 'INR' },
             'pro': { name: 'Google AI Pro', pricePerUser: 1950, currency: 'INR' },
-            'ultra': { name: 'Google AI Ultra', pricePerUser: 0, currency: 'INR' }, // Custom
+            'ultra': { name: 'Google AI Ultra', pricePerUser: 24500, currency: 'INR' }, // Custom
         },
     },
 };
