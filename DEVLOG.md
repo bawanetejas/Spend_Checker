@@ -56,3 +56,23 @@ the interview are still remaining ,
 **Plan for tomorrow:**  
 Work on the remaining calculation logic
 Draft the initial GTM (Go-To-Market) strategy.
+
+## Day 4 — 2026-05-10
+
+**Hours worked:** 6hr
+
+**What I did:**  
+Worked on the remaining vendor tool audit logic ,
+also worked on the go to market stratergy
+
+**What I learned:**  
+Developing the go-to-market strategy required a different way of thinking. To drive traction for the tool, I needed to approach problems from the customer’s perspective, identify meaningful pain points, and clearly demonstrate how the solution delivers real value and impact.
+
+**Blockers / what I'm stuck on:**  
+The calculation part for other tool required some adjustment,
+the interview are still remaining ,
+
+**Plan for tomorrow:**  
+Work on the remaining calculation logic
+Connect the supabase with the application
+create the sharable unique url
