@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { saveLead, hasSubmittedLead } from '../lib/api';
+import  { saveLead, hasSubmittedLead } from '../lib/api';
 
 interface LeadCaptureFormProps {
   auditId: string;
