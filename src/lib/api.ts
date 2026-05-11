@@ -72,3 +72,28 @@ export async function getAuditResult(id: string): Promise<AuditResult | null> {
         createdAt: data.created_at,
     };
 }
+
+
+// capture lead
+
+export async function saveLead(lead: LeadInput): Promise<void> {
+    const { error } = await supabase
+        .from('leads')
+        .insert({
+            audit_id: lead.auditId,
+            email: lead.email,
+            company_name: lead.companyName || null,
+            role: lead.role || null,
+            team_size: lead.teamSize || null,
+        });
+
+
+    if (error) {
+        // Check for duplicate
+        if (error.code === '23505') {
+            throw new APIError('Email already submitted for this audit', error.code);
+        }
+        console.error('Error saving lead:', error);
+        throw new APIError('Failed to save lead', error.code);
+    }
+}
