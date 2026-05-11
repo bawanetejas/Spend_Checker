@@ -2,17 +2,19 @@
 import React, { useState } from 'react';
 import type { AuditInput, Vendor, UseCase, ToolInput } from '../lib/types';
 import { getPlansForVendor } from '../utils/planOptions';
+import { useFormPersistence } from '../hooks/useFormPersistence';
 
 interface AuditFormProps {
   onSubmit: (data: AuditInput) => void;
 }
 
+
 export function AuditForm({ onSubmit }: AuditFormProps) {
-  const [tools, setTools] = useState<ToolInput[]>([
-    { vendor: 'cursor', plan: 'pro', monthlySpend: 0, seats: 1 }
-  ]);
-  const [useCase, setUseCase] = useState<UseCase>('coding');
-  const [teamSize, setTeamSize] = useState(5);
+const [tools, setTools] = useFormPersistence<ToolInput[]>('audit-tools', [
+  { vendor: 'cursor', plan: 'pro', monthlySpend: 0, seats: 1 }
+]);
+const [useCase, setUseCase] = useFormPersistence<UseCase>('audit-usecase', 'coding');
+const [teamSize, setTeamSize] = useFormPersistence<number>('audit-teamsize', 5);
 
   const addTool = () => {
     setTools([...tools, { vendor: 'chatgpt', plan: 'plus', monthlySpend: 0, seats: 1 }]);
@@ -129,7 +131,7 @@ export function AuditForm({ onSubmit }: AuditFormProps) {
                     onChange={(e) => updateTool(index, 'monthlySpend', Number(e.target.value))}
                     className="w-full p-2 border rounded"
                     min="0"
-                    step="0.01"
+                    
                   />
                 </div>
 
