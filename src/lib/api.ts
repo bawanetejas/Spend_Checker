@@ -97,3 +97,23 @@ export async function saveLead(lead: LeadInput): Promise<void> {
         throw new APIError('Failed to save lead', error.code);
     }
 }
+
+
+// check lead already stored 
+export async function hasSubmittedLead(auditId: string, email: string): Promise<boolean> {
+    const { data, error } = await supabase
+        .from('leads')
+        .select('id')
+        .eq('audit_id', auditId)
+        .eq('email', email)
+        .maybeSingle();
+
+
+    if (error) {
+        console.error('Error checking lead:', error);
+        return false;
+    }
+
+
+    return data !== null;
+}
