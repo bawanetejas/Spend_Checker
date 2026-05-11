@@ -36,3 +36,39 @@ export async function saveAuditResult(result: AuditResult): Promise<string> {
 
     return data.id;
 }
+
+
+// Get audit result by ID
+
+export async function getAuditResult(id: string): Promise<AuditResult | null> {
+    const { data, error } = await supabase
+        .from('audit_results')
+        .select('*')
+        .eq('id', id)
+        .eq('is_public', true)
+        .single();
+
+
+    if (error) {
+        if (error.code === 'PGRST116') {
+            // Not found
+            return null;
+        }
+        console.error('Error fetching audit:', error);
+        throw new APIError('Failed to fetch audit result', error.code);
+    }
+
+
+    // Transform database row to AuditResult
+    return {
+        id: data.id,
+        tools: data.tools,
+        recommendations: data.recommendations,
+        totalMonthlySavings: Number(data.total_monthly_savings),
+        totalAnnualSavings: Number(data.total_annual_savings),
+        useCase: data.use_case as any,
+        teamSize: data.team_size,
+        aiSummary: data.ai_summary || undefined,
+        createdAt: data.created_at,
+    };
+}
