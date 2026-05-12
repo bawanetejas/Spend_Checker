@@ -77,7 +77,7 @@ Work on the remaining calculation logic
 Connect the supabase with the application
 create the sharable unique url
 
-## Day 5 — 2026-05-12
+## Day 5 — 2026-05-11
 
 **Hours worked:** 4hr
 
@@ -102,3 +102,32 @@ create the sharable unique url
 
 - Set up the CI/CD pipeline
 - Debug and resolve issues in the audit code
+
+## Day 6 — 2026-05-12
+
+**Hours worked:** 8hr
+
+**What I did:**
+
+- Debugged the audit logic across all tools
+- Optimized the web application for Lighthouse metrics, including performance, accessibility, and best practices
+- Deployed the project on Vercel
+- Added the banner for the Optimal use case
+
+**What I learned:**
+
+- Gained hands-on experience deploying a TypeScript application
+- Learned techniques for optimizing web bundles using Vite configuration and improved coding practices
+- Improved understanding of application performance tuning and frontend optimization strategies
+
+**Blockers / what I'm stuck on:**
+
+- CI/CD pipeline integration
+- Email sending feature integration
+
+**Plan for tomorrow:**
+
+- Complete CI/CD pipeline integration
+- Integrate the email sending feature with Honeypot protection
+- Work on AI integration
+- Continue working on the remaining entrepreneurial files
