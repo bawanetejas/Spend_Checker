@@ -15,7 +15,7 @@ export function auditCursor(context: AuditContext): Recommendation[] {
     // Rule 1: Spending verification
     if (isOverpaying(monthlySpend, expectedSpendINR)) {
         const planPrice = getPlanPrice('cursor', plan) * USD_TO_INR;
-        console.log("plan pric" + planPrice)
+
         const savings = calculateSavings(monthlySpend, planPrice * seats);
 
         recommendations.push({
@@ -28,7 +28,7 @@ export function auditCursor(context: AuditContext): Recommendation[] {
             newSpend: planPrice * seats,
             monthlySavings: savings.monthly,
             annualSavings: savings.annual,
-            reasoning: `Billing error: Cursor ${plan} costs $${getPlanPrice('cursor', plan)}/user (₹${planPrice.toFixed(0)}), not ₹${monthlySpend.toFixed(0)}.`,
+            reasoning: `Billing error: Cursor ${plan} costs $${getPlanPrice('cursor', plan)}/user (₹${planPrice.toFixed(0)}), not ₹${(monthlySpend / seats).toFixed(0)}.`,
             confidence: 'high',
         });
     }
@@ -49,7 +49,7 @@ export function auditCursor(context: AuditContext): Recommendation[] {
             newSpend,
             monthlySavings: savings.monthly,
             annualSavings: savings.annual,
-            reasoning: `Ultra ($200/user) is for extreme power users. Pro ($20/user) handles 99% of use cases with 500 fast requests/mo.`,
+            reasoning: `Ultra ($200/user) (₹${Math.ceil(200 * USD_TO_INR)}/user) is for extreme power users. Pro ($20/user) (₹${Math.ceil(20 * USD_TO_INR)}/user) handles 99% of use cases with 500 fast requests/mo.`,
             confidence: 'medium',
         });
     }
@@ -71,7 +71,7 @@ export function auditCursor(context: AuditContext): Recommendation[] {
                 newSpend,
                 monthlySavings: savings.monthly,
                 annualSavings: savings.annual,
-                reasoning: `Pro+ ($60/user) vs Pro ($20/user): Unless you consistently hit Pro limits, downgrade saves ₹${(savings.monthly / seats).toFixed(0)}/user/mo.`,
+                reasoning: `Pro+ ($60/user) (₹${Math.ceil(60 * USD_TO_INR)}/user) vs Pro ($20/user) (₹${Math.ceil(20 * USD_TO_INR)}/user): Unless you consistently hit Pro limits, downgrade saves ₹${(savings.monthly / seats).toFixed(0)}/user/mo.`,
                 confidence: 'medium',
             });
         }
@@ -93,7 +93,7 @@ export function auditCursor(context: AuditContext): Recommendation[] {
             newSpend,
             monthlySavings: savings.monthly,
             annualSavings: savings.annual,
-            reasoning: `Teams ($40/user) adds admin controls. For ${seats} user(s), Pro ($20/user) provides same AI capabilities.`,
+            reasoning: `Teams ($40/user) (₹${Math.ceil(40 * USD_TO_INR)}/user) adds admin controls. For ${seats} user(s), Pro ($20/user) (₹${Math.ceil(20 * USD_TO_INR)}/user) provides same AI capabilities.`,
             confidence: 'high',
         });
     }
@@ -127,7 +127,7 @@ export function auditCursor(context: AuditContext): Recommendation[] {
         const newSpend = monthlySpend * (1 - credexDiscount);
         const savings = calculateSavings(monthlySpend, newSpend);
 
-        if (savings.monthly >= 41650) {
+        if (savings.monthly >= 500 * USD_TO_INR) {
             recommendations.push({
                 action: 'credits',
                 currentTool: 'Cursor',

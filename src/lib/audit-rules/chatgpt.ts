@@ -27,7 +27,7 @@ export function auditChatGPT(context: AuditContext): Recommendation[] {
             newSpend: planPrice * seats,
             monthlySavings: savings.monthly,
             annualSavings: savings.annual,
-            reasoning: `You're paying ₹${monthlySpend.toFixed(0)}/mo but ${plan} costs ₹${planPrice}/user. Correct billing or check for extra charges.`,
+            reasoning: `You're paying ₹${(monthlySpend / seats).toFixed(0)}/mo/user but ${plan} costs ₹${planPrice}/user. Correct billing or check for extra charges.`,
             confidence: 'high',
         });
     }
@@ -82,7 +82,7 @@ export function auditChatGPT(context: AuditContext): Recommendation[] {
         const newSpend = cursorProPrice * USD_TO_INR * seats;
         const savings = calculateSavings(monthlySpend, newSpend);
 
-        if (savings.monthly > 1000 && getToolFitScore('cursor', useCase) > getToolFitScore('chatgpt', useCase)) {
+        if (savings.monthly > 10000 && getToolFitScore('cursor', useCase) > getToolFitScore('chatgpt', useCase)) {
             recommendations.push({
                 action: 'switch',
                 currentTool: 'ChatGPT',

@@ -8,6 +8,7 @@ export function auditClaude(context: AuditContext): Recommendation[] {
     const { plan, monthlySpend, seats } = tool;
     const recommendations: Recommendation[] = [];
 
+
     const expectedSpendUSD = getPlanPrice('claude', plan) * seats;
     const expectedSpendINR = expectedSpendUSD * USD_TO_INR;
 

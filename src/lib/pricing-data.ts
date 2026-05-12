@@ -83,7 +83,7 @@ export const PRICING_DATABASE: Record<string, VendorPricing> = {
 };
 
 // Exchange rate (approximate, should be updated regularly)
-export const USD_TO_INR = 83.5;
+export const USD_TO_INR = Number(import.meta.env.VITE_USD_TO_INR);
 
 export function normalizeToINR(amount: number, currency: 'USD' | 'INR'): number {
     return currency === 'USD' ? amount * USD_TO_INR : amount;
