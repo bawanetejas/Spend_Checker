@@ -1,15 +1,15 @@
-// lib/audit-rules/chatgpt.ts
+
 import type { AuditContext, Recommendation } from '../types';
 import { getPlanPrice } from '../pricing-data';
 import { calculateSavings, isOverpaying, getToolFitScore } from './common';
 
 export function auditChatGPT(context: AuditContext): Recommendation[] {
-    const { tool, useCase, teamSize } = context;
+    const { tool, useCase } = context;
     const { plan, monthlySpend, seats } = tool;
     const recommendations: Recommendation[] = [];
 
     const expectedSpend = getPlanPrice('chatgpt', plan) * seats;
-    const costPerSeat = monthlySpend / seats;
+    // const costPerSeat = monthlySpend / seats;
 
     // Rule 1: Spending verification
     if (isOverpaying(monthlySpend, expectedSpend)) {

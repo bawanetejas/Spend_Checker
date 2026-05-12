@@ -3,9 +3,13 @@ import { supabase } from './supabase';
 import type { AuditResult, LeadInput } from './types';
 
 export class APIError extends Error {
+    code?: string;
+
     constructor(message: string, code?: string) {
         super(message);
+
         this.name = 'APIError';
+        this.code = code;
     }
 }
 

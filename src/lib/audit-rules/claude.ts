@@ -1,10 +1,10 @@
 // lib/audit-rules/claude.ts
 import type { AuditContext, Recommendation } from '../types';
 import { getPlanPrice, USD_TO_INR } from '../pricing-data';
-import { calculateSavings, isOverpaying, getToolFitScore } from './common';
+import { calculateSavings, isOverpaying } from './common';
 
 export function auditClaude(context: AuditContext): Recommendation[] {
-    const { tool, useCase, teamSize } = context;
+    const { tool, useCase, } = context;
     const { plan, monthlySpend, seats } = tool;
     const recommendations: Recommendation[] = [];
 

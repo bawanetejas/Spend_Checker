@@ -1,5 +1,4 @@
 
-import React from 'react';
 import type { AuditResult } from '../lib/types';
 
 interface AuditResultsProps {

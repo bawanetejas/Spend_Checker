@@ -1,5 +1,5 @@
 
-import type { UseCase, Recommendation, ToolInput, AuditContext } from '../types';
+import type { UseCase } from '../types';
 
 export function calculateSavings(currentSpend: number, newSpend: number): {
     monthly: number;

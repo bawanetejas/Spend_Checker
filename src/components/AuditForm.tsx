@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import type { AuditInput, Vendor, UseCase, ToolInput } from '../lib/types';
 import { getPlansForVendor } from '../utils/planOptions';
 import { useFormPersistence } from '../hooks/useFormPersistence';
