@@ -76,3 +76,29 @@ the interview are still remaining ,
 Work on the remaining calculation logic
 Connect the supabase with the application
 create the sharable unique url
+
+## Day 5 — 2026-05-12
+
+**Hours worked:** 4hr
+
+**What I did:**
+
+- Worked on the lead capture form implementation
+- Integrated Supabase and designed the required database schema
+- Created APIs to connect the form with the database
+- Built a data persistence hook to retain form data during page reloads
+- Developed a shareable audit URL feature and implemented data rendering functionality
+
+**What I learned:**
+
+- Gained hands-on experience with Supabase integration on the frontend
+- Learned techniques for optimizing web bundles using Vite configuration
+
+**Blockers / what I'm stuck on:**
+
+- Since Supabase is a new technology for me, I spent additional time exploring its features and understanding the implementation workflow
+
+**Plan for tomorrow:**
+
+- Set up the CI/CD pipeline
+- Debug and resolve issues in the audit code
