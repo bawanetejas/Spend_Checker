@@ -31,7 +31,7 @@ export function auditGemini(context: AuditContext): Recommendation[] {
     }
 
     // Rule 2: AI Pro analysis
-    if (plan === 'ai-pro' && seats >= 3) {
+    if (plan === 'pro' && seats >= 3) {
         const chatgptPlusPrice = getPlanPrice('chatgpt', 'plus');
         const newSpend = chatgptPlusPrice * seats;
         const savings = calculateSavings(monthlySpend, newSpend);
@@ -54,7 +54,7 @@ export function auditGemini(context: AuditContext): Recommendation[] {
     }
 
     // Rule 3: AI Plus vs Free for light users
-    if (plan === 'ai-plus' && teamSize <= 2) {
+    if (plan === 'ultra' && teamSize <= 2) {
         const freePrice = 0;
         const savings = calculateSavings(monthlySpend, freePrice);
 
