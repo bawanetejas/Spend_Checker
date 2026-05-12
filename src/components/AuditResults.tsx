@@ -109,7 +109,7 @@ export function AuditResults({ result }: AuditResultsProps) {
             Credex can help you access these same tools at up to 25% additional discount through our credit marketplace.
           </p>
           <button className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
-            Book a Consultation
+            <a href='https://credex.rocks/' target='_blank'>Book a Consultation</a>
           </button>
         </div>
       )}
