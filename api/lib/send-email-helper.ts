@@ -1,20 +1,20 @@
 import { Resend } from 'resend';
-
+const USD_TO_INR = Number(process.env.USD_TO_INR)
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export interface AuditEmailData {
-    email: string;
-    companyName?: string;
-    auditId: string;
-    totalMonthlySavings: number;
-    totalAnnualSavings: number;
-    auditUrl: string;
+  email: string;
+  companyName?: string;
+  auditId: string;
+  totalMonthlySavings: number;
+  totalAnnualSavings: number;
+  auditUrl: string;
 }
 
 export async function sendAuditConfirmationEmail(data: AuditEmailData): Promise<boolean> {
-    const isHighValue = data.totalMonthlySavings > 500;
+  const isHighValue = data.totalMonthlySavings > 500 * USD_TO_INR;
 
-    const htmlContent = `
+  const htmlContent = `
     <!DOCTYPE html>
     <html>
     <head>
@@ -54,7 +54,7 @@ export async function sendAuditConfirmationEmail(data: AuditEmailData): Promise<
           ${isHighValue ? `
             <div class="high-value">
               <h3>🚀 High-Value Opportunity Detected</h3>
-              <p>Your audit shows savings of over ₹500/month. Our team at Credex will reach out within 24 hours to help you capture these savings through our discounted AI credit marketplace.</p>
+              <p>Your audit shows savings of over ₹${Math.ceil(500 * USD_TO_INR)}. Our team at Credex will reach out within 24 hours to help you capture these savings through our discounted AI credit marketplace.</p>
             </div>
           ` : `
             <p>You're doing well! For future optimization opportunities, we'll keep you posted when new tools or better plans become available.</p>
@@ -82,16 +82,16 @@ export async function sendAuditConfirmationEmail(data: AuditEmailData): Promise<
     </html>
   `;
 
-    const textContent = `
+  const textContent = `
 Your AI Spend Audit is Ready
 
 Total Savings Potential: ₹${data.totalMonthlySavings.toLocaleString('en-IN')}/month
 Annual Savings: ₹${data.totalAnnualSavings.toLocaleString('en-IN')}/year
 
 ${isHighValue ?
-            'High-Value Opportunity: Your audit shows significant savings. Credex team will reach out within 24 hours.' :
-            'You\'re spending well! We\'ll notify you of future optimization opportunities.'
-        }
+      'High-Value Opportunity: Your audit shows significant savings. Credex team will reach out within 24 hours.' :
+      'You\'re spending well! We\'ll notify you of future optimization opportunities.'
+    }
 
 View your full report: ${data.auditUrl}
 
@@ -100,26 +100,26 @@ AI Spend Audit
 Questions? Reply to this email.
   `;
 
-    try {
-        const { data: result, error } = await resend.emails.send({
-            from: 'AI Spend Audit <onboarding@resend.dev>', // Use verified domain in production
-            to: [data.email],
-            subject: isHighValue
-                ? `💰 You could save ₹${data.totalMonthlySavings.toLocaleString('en-IN')}/month on AI tools`
-                : '✅ Your AI Spend Audit Results',
-            html: htmlContent,
-            text: textContent,
-        });
+  try {
+    const { data: result, error } = await resend.emails.send({
+      from: 'AI Spend Audit <onboarding@resend.dev>', // Use verified domain in production
+      to: [data.email],
+      subject: isHighValue
+        ? `💰 You could save ₹${data.totalMonthlySavings.toLocaleString('en-IN')}/month on AI tools`
+        : '✅ Your AI Spend Audit Results',
+      html: htmlContent,
+      text: textContent,
+    });
 
-        if (error) {
-            console.error('Email send error:', error);
-            return false;
-        }
-
-        console.log('Email sent successfully:', result);
-        return true;
-    } catch (error) {
-        console.error('Email service error:', error);
-        return false;
+    if (error) {
+      console.error('Email send error:', error);
+      return false;
     }
+
+    console.log('Email sent successfully:', result);
+    return true;
+  } catch (error) {
+    console.error('Email service error:', error);
+    return false;
+  }
 }
