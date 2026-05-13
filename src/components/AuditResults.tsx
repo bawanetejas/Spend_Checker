@@ -19,7 +19,7 @@ export function AuditResults({ result }: AuditResultsProps) {
         <h2 className="text-3xl font-bold text-gray-800 mb-4">
           Your Savings Potential
         </h2>
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 gap-6">
           <div>
             <p className="text-sm text-gray-600">Monthly Savings</p>
             <p className="text-4xl font-bold text-green-600">
