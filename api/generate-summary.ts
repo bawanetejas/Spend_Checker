@@ -1,4 +1,4 @@
-import { generateAuditSummary } from "./lib/ai";
+import { generateAuditSummary } from "./lib/ai.js";
 
 export default async function handler(req: any, res: any) {
 
