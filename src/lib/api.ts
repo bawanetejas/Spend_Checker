@@ -17,6 +17,7 @@ export class APIError extends Error {
 //  Save audit result to Supabase
 
 export async function saveAuditResult(result: AuditResult): Promise<string> {
+
     const { data, error } = await supabase
         .from('audit_results')
         .insert({
@@ -27,11 +28,12 @@ export async function saveAuditResult(result: AuditResult): Promise<string> {
             total_annual_savings: result.totalAnnualSavings,
             use_case: result.useCase,
             team_size: result.teamSize,
-            ai_summary: result.aiSummary || null,
+            ai_summary: result.ai_summary || null,
             is_public: true,
         })
         .select('id')
         .single();
+
 
     if (error) {
         console.error('Error saving audit:', error);
@@ -72,7 +74,7 @@ export async function getAuditResult(id: string): Promise<AuditResult | null> {
         totalAnnualSavings: Number(data.total_annual_savings),
         useCase: data.use_case as any,
         teamSize: data.team_size,
-        aiSummary: data.ai_summary || undefined,
+        ai_summary: data.ai_summary || undefined,
         createdAt: data.created_at,
     };
 }

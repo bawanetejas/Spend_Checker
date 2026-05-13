@@ -64,6 +64,7 @@ export function runAudit(input: AuditInput): Omit<AuditResult, 'id' | 'createdAt
         totalAnnualSavings,
         useCase: input.useCase,
         teamSize: input.teamSize,
+
     };
 }
 

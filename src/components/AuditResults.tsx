@@ -5,7 +5,12 @@ interface AuditResultsProps {
 }
 
 export function AuditResults({ result }: AuditResultsProps) {
-  const { recommendations, totalMonthlySavings, totalAnnualSavings } = result;
+  const {
+    recommendations,
+    totalMonthlySavings,
+    totalAnnualSavings,
+    ai_summary,
+  } = result;
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-8">
@@ -107,6 +112,12 @@ export function AuditResults({ result }: AuditResultsProps) {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* AI summary */}
+
+      <div className="bg-purple-50 border-2 border-purple-200 rounded-lg p-6">
+        <p>{ai_summary}</p>
       </div>
 
       {/* Credex CTA */}

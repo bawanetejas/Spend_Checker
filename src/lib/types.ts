@@ -38,7 +38,7 @@ export interface AuditResult {
     totalAnnualSavings: number;
     useCase: UseCase;
     teamSize: number;
-    aiSummary?: string;
+    ai_summary?: string;
     createdAt: string;
 }
 
