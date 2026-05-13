@@ -1,7 +1,7 @@
 
 import { supabase } from './supabase';
 import type { AuditResult, LeadInput } from './types';
-
+import { checkRateLimit } from "./rate-limit"
 export class APIError extends Error {
     code?: string;
 
@@ -80,7 +80,17 @@ export async function getAuditResult(id: string): Promise<AuditResult | null> {
 
 // capture lead
 
-export async function saveLead(lead: LeadInput): Promise<void> {
+export async function saveLead(
+    lead: LeadInput,
+    auditData: { totalMonthlySavings: number; totalAnnualSavings: number }
+): Promise<void> {
+    // Rate limit check
+    const rateLimitResult = await checkRateLimit(lead.email);
+    if (!rateLimitResult.allowed) {
+        throw new APIError('Too many submissions. Please try again in an hour.', 'RATE_LIMIT_EXCEEDED');
+    }
+
+    // Save to database
     const { error } = await supabase
         .from('leads')
         .insert({
@@ -91,15 +101,31 @@ export async function saveLead(lead: LeadInput): Promise<void> {
             team_size: lead.teamSize || null,
         });
 
-
     if (error) {
-        // Check for duplicate
         if (error.code === '23505') {
             throw new APIError('Email already submitted for this audit', error.code);
         }
-        console.error('Error saving lead:', error);
         throw new APIError('Failed to save lead', error.code);
     }
+
+    // Send confirmation email (don't await - fire and forget smooth working)
+    const auditUrl = `${window.location.origin}?audit=${lead.auditId}`;
+
+    await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email: lead.email,
+            companyName: lead.companyName,
+            auditId: lead.auditId,
+            totalMonthlySavings: auditData.totalMonthlySavings,
+            totalAnnualSavings: auditData.totalAnnualSavings,
+            auditUrl,
+        }),
+    });
+
 }
 
 

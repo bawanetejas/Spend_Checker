@@ -1,22 +1,32 @@
-
-import React, { useState } from 'react';
-import  { saveLead, hasSubmittedLead } from '../lib/api';
+import React, { useState } from "react";
+import { saveLead, hasSubmittedLead } from "../lib/api";
 
 interface LeadCaptureFormProps {
   auditId: string;
+  auditData: {
+    totalMonthlySavings: number;
+    totalAnnualSavings: number;
+  };
 }
 
-export function LeadCaptureForm({ auditId }: LeadCaptureFormProps) {
-  const [email, setEmail] = useState('');
-  const [companyName, setCompanyName] = useState('');
-  const [role, setRole] = useState('');
-  const [teamSize, setTeamSize] = useState<number | ''>('');
+export function LeadCaptureForm({ auditId, auditData }: LeadCaptureFormProps) {
+  const [email, setEmail] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [role, setRole] = useState("");
+  const [teamSize, setTeamSize] = useState<number | "">("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const [honeypot, setHoneypot] = useState(""); // HONEYPOT FIELD
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (honeypot) {
+      console.warn("Bot detected");
+      setError("try again later");
+    }
     setLoading(true);
     setError(null);
 
@@ -24,22 +34,24 @@ export function LeadCaptureForm({ auditId }: LeadCaptureFormProps) {
       // Check if already submitted
       const alreadySubmitted = await hasSubmittedLead(auditId, email);
       if (alreadySubmitted) {
-        setError('This email has already been submitted for this audit');
+        setError("This email has already been submitted for this audit");
         setLoading(false);
         return;
       }
 
-      await saveLead({
-        auditId,
-        email,
-        companyName: companyName || undefined,
-        role: role || undefined,
-        teamSize: teamSize ? Number(teamSize) : undefined,
-      });
-
+      await saveLead(
+        {
+          auditId,
+          email,
+          companyName: companyName || undefined,
+          role: role || undefined,
+          teamSize: teamSize ? Number(teamSize) : undefined,
+        },
+        auditData,
+      );
       setSubmitted(true);
     } catch (err: any) {
-      setError(err.message || 'Failed to submit. Please try again.');
+      setError(err.message || "Failed to submit. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -53,7 +65,8 @@ export function LeadCaptureForm({ auditId }: LeadCaptureFormProps) {
           Thanks! Check your email
         </h3>
         <p className="text-green-800">
-          We've sent you a copy of this audit. Our team will reach out if we can help you save more.
+          We've sent you a copy of this audit. Our team will reach out if we can
+          help you save more.
         </p>
       </div>
     );
@@ -63,7 +76,8 @@ export function LeadCaptureForm({ auditId }: LeadCaptureFormProps) {
     <div className="bg-white border rounded-lg p-6">
       <h3 className="text-xl font-semibold mb-2">Get Your Full Report</h3>
       <p className="text-gray-600 mb-4">
-        Enter your email to receive a detailed breakdown and get notified about future optimization opportunities.
+        Enter your email to receive a detailed breakdown and get notified about
+        future optimization opportunities.
       </p>
 
       {error && (
@@ -77,7 +91,7 @@ export function LeadCaptureForm({ auditId }: LeadCaptureFormProps) {
           <label className="block text-sm font-medium mb-1">
             Email <span className="text-red-500">*</span>
           </label>
-          <input 
+          <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -87,10 +101,29 @@ export function LeadCaptureForm({ auditId }: LeadCaptureFormProps) {
           />
         </div>
 
+        {/* HONEYPOT - Hidden from humans, visible to bots */}
+        <div
+          style={{ position: "absolute", left: "-9999px" }}
+          aria-hidden="true"
+        >
+          <label htmlFor="website">Website</label>
+          <input
+            type="text"
+            id="website"
+            name="website"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Company Name</label>
-            <input 
+            <label className="block text-sm font-medium mb-1">
+              Company Name
+            </label>
+            <input
               type="text"
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
@@ -101,7 +134,7 @@ export function LeadCaptureForm({ auditId }: LeadCaptureFormProps) {
 
           <div>
             <label className="block text-sm font-medium mb-1">Role</label>
-            <input 
+            <input
               type="text"
               value={role}
               onChange={(e) => setRole(e.target.value)}
@@ -113,22 +146,24 @@ export function LeadCaptureForm({ auditId }: LeadCaptureFormProps) {
 
         <div>
           <label className="block text-sm font-medium mb-1">Team Size</label>
-          <input 
+          <input
             type="number"
             value={teamSize}
-            onChange={(e) => setTeamSize(e.target.value ? Number(e.target.value) : '')}
+            onChange={(e) =>
+              setTeamSize(e.target.value ? Number(e.target.value) : "")
+            }
             className="w-full p-2 border rounded"
             placeholder="Optional"
             min="1"
           />
         </div>
 
-        <button 
+        <button
           type="submit"
           disabled={loading}
           className="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50"
         >
-          {loading ? 'Submitting...' : 'Get My Report'}
+          {loading ? "Submitting..." : "Get My Report"}
         </button>
 
         <p className="text-xs text-gray-500 text-center">
