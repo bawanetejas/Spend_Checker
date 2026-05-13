@@ -1,6 +1,6 @@
 import {
     sendAuditConfirmationEmail,
-} from "./send-email-helper";
+} from "./lib/send-email-helper";
 
 export default async function handler(req: any, res: any) {
     if (req.method !== "POST") {
