@@ -76,10 +76,21 @@ function App() {
     try {
       // Run audit logic
       const result = runAudit(input);
+
+      // run ai summary logic
+      const response = await fetch("/api/generate-summary", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(result),
+      });
+      const data = await response.json();
       const fullResult: AuditResult = {
         ...result,
         id: generateAuditId(),
         createdAt: new Date().toISOString(),
+        ai_summary: data.summary,
       };
 
       // Save to Supabase
