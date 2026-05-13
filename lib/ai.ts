@@ -44,10 +44,13 @@ Output rules:
 
 
         // graceful fallback
-        return `
-Your audit identified potential AI cost optimization opportunities.
-You could save approximately ₹${data.totalMonthlySavings}
-per month by optimizing subscriptions and selecting better pricing plans.
-`;
+
+        const fallbackSummary =
+            data.totalMonthlySavings <= 1000
+                ? `Your audit indicates that your current AI tool usage is already well-optimized for your present needs. The existing subscription setup provides good value with minimal additional savings opportunities at this time.`
+                : `Your audit identified potential AI cost optimization opportunities. You could save approximately ₹${Math.floor(
+                    data.totalMonthlySavings
+                )} per month by optimizing subscriptions and selecting better pricing plans.`;
+        return fallbackSummary;
     }
 }
