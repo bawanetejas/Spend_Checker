@@ -73,3 +73,42 @@ Ravinder expressed strong interest in discovering alternative tools that provide
 - The current design direction is acceptable and does not require major changes.
 - However, user trust should be treated as the highest priority throughout the product experience.
 - Transparency, honest recommendations, and credibility are critical for adoption.
+
+## User Interview — Priya (Engineering Manager)
+
+### Q1. How do you currently track your team's spend on AI tools?
+
+**Response:**  
+AI spending is primarily tracked through invoices and shared spreadsheets. Since different teams use different AI tools, managing everything in one place becomes difficult.
+
+---
+
+### Q2. What is the most frustrating part about managing these subscriptions?
+
+**Response:**
+
+- Lack of visibility into which subscriptions are actively being used
+- Multiple teams paying for similar or overlapping tools
+- Difficulty tracking total monthly AI spending
+- Challenges explaining increasing AI costs during budget or review discussions
+
+---
+
+### Q3. If a tool showed you that you could save $200/month by switching plans, would that be enough to make you actually switch?
+
+**Response:**  
+Priya mentioned that she would consider switching plans if the recommendations were reliable and did not negatively affect team productivity or workflow efficiency.
+
+---
+
+### Key Insight / Surprising Observation
+
+Priya highlighted that AI subscription management becomes increasingly difficult as teams scale. She felt that a simple dashboard showing subscriptions, usage patterns, and potential savings opportunities would provide strong practical value for engineering teams.
+
+---
+
+### Design Feedback
+
+- Keep the interface simple and easy to trust
+- Clearly explain why recommendations are being made
+- Prioritize transparency over excessive features
